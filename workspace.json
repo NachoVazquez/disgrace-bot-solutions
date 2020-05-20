@@ -68,7 +68,10 @@
               "apps/disgrace-management/tsconfig.app.json",
               "apps/disgrace-management/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/disgrace-management/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/disgrace-management/**"
+            ]
           }
         },
         "test": {
@@ -104,11 +107,75 @@
           "options": {
             "linter": "eslint",
             "config": "apps/disgrace-management-e2e/.eslintrc",
-            "tsConfig": ["apps/disgrace-management-e2e/tsconfig.e2e.json"],
+            "tsConfig": [
+              "apps/disgrace-management-e2e/tsconfig.e2e.json"
+            ],
             "exclude": [
               "**/node_modules/**",
               "!apps/disgrace-management-e2e/**"
             ]
+          }
+        }
+      }
+    },
+    "disgrace-bot": {
+      "root": "apps/disgrace-bot",
+      "sourceRoot": "apps/disgrace-bot/src",
+      "projectType": "application",
+      "prefix": "disgrace-bot",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/disgrace-bot",
+            "main": "apps/disgrace-bot/src/main.ts",
+            "tsConfig": "apps/disgrace-bot/tsconfig.app.json",
+            "assets": [
+              "apps/disgrace-bot/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/disgrace-bot/src/environments/environment.ts",
+                  "with": "apps/disgrace-bot/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "disgrace-bot:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/disgrace-bot/.eslintrc",
+            "tsConfig": [
+              "apps/disgrace-bot/tsconfig.app.json",
+              "apps/disgrace-bot/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/disgrace-bot/**"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/disgrace-bot/jest.config.js",
+            "tsConfig": "apps/disgrace-bot/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
