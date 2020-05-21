@@ -68,10 +68,7 @@
               "apps/disgrace-management/tsconfig.app.json",
               "apps/disgrace-management/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/disgrace-management/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/disgrace-management/**"]
           }
         },
         "test": {
@@ -107,9 +104,7 @@
           "options": {
             "linter": "eslint",
             "config": "apps/disgrace-management-e2e/.eslintrc",
-            "tsConfig": [
-              "apps/disgrace-management-e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": ["apps/disgrace-management-e2e/tsconfig.e2e.json"],
             "exclude": [
               "**/node_modules/**",
               "!apps/disgrace-management-e2e/**"
@@ -131,9 +126,7 @@
             "outputPath": "dist/apps/disgrace-bot",
             "main": "apps/disgrace-bot/src/main.ts",
             "tsConfig": "apps/disgrace-bot/tsconfig.app.json",
-            "assets": [
-              "apps/disgrace-bot/src/assets"
-            ]
+            "assets": ["apps/disgrace-bot/src/assets"]
           },
           "configurations": {
             "production": {
@@ -164,10 +157,7 @@
               "apps/disgrace-bot/tsconfig.app.json",
               "apps/disgrace-bot/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/disgrace-bot/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/disgrace-bot/**"]
           }
         },
         "test": {

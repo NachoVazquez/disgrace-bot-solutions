@@ -29,6 +29,7 @@
   "dependencies": {
     "@emotion/core": "10.0.28",
     "@emotion/styled": "10.0.27",
+    "discord.js": "^12.2.0",
     "document-register-element": "1.14.3",
     "react": "16.13.1",
     "react-dom": "16.13.1"
