@@ -1,5 +1,5 @@
 import { Client, Message } from 'discord.js';
-import * as config from '../../assets/config.json';
+import * as config from '../../assets/json/config.json';
 import { ChannelType } from '../types/channel-type';
 
 function randomizeDisgrace(message: Message): void {

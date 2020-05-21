@@ -1,6 +1,7 @@
 import { Client, TextChannel } from 'discord.js';
 import { randomizeDisgracersOnMessage } from '../commands/randomize-disgrace';
-import * as config from '../../assets/config.json';
+import * as config from '../../assets/json/config.json';
+import { enteredDisgrace } from '../events/entered-disgrace';
 
 export class DisgraceBot {
   client: Client;
@@ -9,6 +10,7 @@ export class DisgraceBot {
     this.client = new Client();
     this.broadcastOnBotReady();
     randomizeDisgracersOnMessage(this.client);
+    enteredDisgrace(this.client);
     await this.client.login(config.token);
   }
 
