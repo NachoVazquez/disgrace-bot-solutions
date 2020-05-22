@@ -4,8 +4,6 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -25,5 +23,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn build disgrace-bot
-    - run: yarn test disgrace-bot
+    - run: yarn nx affected --target=test --base=remote/master
+    - run: yarn nx affected --target=lint --base=remote/master
+    - run: yarn nx affected --target=build --base=remote/master --prod
