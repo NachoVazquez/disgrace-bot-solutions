@@ -25,7 +25,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn affected:lint
     - run: yarn format:check
     - run: yarn affected:build
     - run: yarn affected:test
