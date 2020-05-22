@@ -4,14 +4,13 @@
 name: CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [master]
+  push:
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,11 +18,12 @@ jobs:
         node-version: [12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn build disgrace-bot
-    - run: yarn test disgrace-bot
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn nx affected --target=test --base=master
+      - run: yarn nx affected --target=lint --base=master
+      - run: yarn nx affected --target=build --base=master --prod
