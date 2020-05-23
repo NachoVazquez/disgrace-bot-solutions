@@ -1,0 +1,12 @@
+
+{
+  "name": "discord-bot",
+  "description": "Simple Package.json just for start the server",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "author": "Nacho Vazquez",
+  "scripts": {
+      "start": "node main.js"
+  }
+}
