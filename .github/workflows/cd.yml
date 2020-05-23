@@ -30,17 +30,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: npm install, build, and test
-        run: |
+      - run: git fetch --no-tags --prune --depth=5 origin master
+      - run: |
           # Build and test the project, then
           # deploy to Azure Web App.
-          yarn install
-          yarn build disgrace-bot
-          yarn test disgrace-bot
+          yarn
+          yarn nx affected --target=build --base=origin/master --prod
+          yarn nx affected --target=test --base=origin/master
       - name: 'Deploy to Azure WebApp'
         uses: azure/webapps-deploy@v2
         with:
