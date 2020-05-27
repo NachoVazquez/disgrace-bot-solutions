@@ -36,6 +36,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
+      - name: copy discord bot secrets
+        run: mkdir -p dist/apps/disgrace-bot/assets/json/ && touch dist/apps/disgrace-bot/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> dist/apps/disgrace-bot/assets/json/config.json
       - name: npm install, build, and test
         run: |
           # Build and test the project, then
