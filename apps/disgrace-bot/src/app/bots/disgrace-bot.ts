@@ -17,7 +17,10 @@ export class DisgraceBot {
   broadcastOnBotReady(): void {
     this.client.once('ready', () => {
       this.client.channels.cache.each((channel) => {
-        if (channel.type === 'text' || channel.type === 'dm') {
+        if (
+          channel.type === 'text' ||
+          (channel.type === 'dm' && channel.id === '712686629646499891')
+        ) {
           (channel as TextChannel).send('Comienza la desgracia');
         }
       });

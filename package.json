@@ -6,6 +6,8 @@
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build --prod",
+    "azure-prep": "mkdir -p dist/apps/disgrace-bot/ && cp apps/disgrace-bot/package.json dist/apps/disgrace-bot/ && cp apps/disgrace-bot/web.config dist/apps/disgrace-bot/ && cp apps/disgrace-bot/Dockerfile dist/apps/disgrace-bot/ && cp apps/disgrace-bot/.dockerignore dist/apps/disgrace-bot/",
+    "run-build-docker": "yarn azure-prep && cd dist/apps/disgrace-bot/ && docker build -t dbs/discord-bot . && docker run -d dbs/discord-bot",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
@@ -32,6 +34,7 @@
     "@emotion/styled": "10.0.27",
     "discord.js": "^12.2.0",
     "document-register-element": "1.14.3",
+    "express": "^4.17.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },

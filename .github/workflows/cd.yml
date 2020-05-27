@@ -25,32 +25,31 @@ env:
   NODE_VERSION: '12.x' # set this to the node version to use
 
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
+          fetch-depth: 2
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: git fetch --no-tags --prune --depth=5 origin master
-      - run: |
+      - name: npm install, build, and test
+        run: |
           # Build and test the project, then
           # deploy to Azure Web App.
           yarn
-          yarn nx affected --target=build --base=origin/master --prod
-          yarn nx affected --target=test --base=origin/master
+          yarn nx affected --target=build --base=$(git rev-parse HEAD~1)
+          yarn nx affected --target=test --base=$(git rev-parse HEAD~1)
+          yarn azure-prep
 
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    uses: azure/webapps-deploy@v2
-    with:
-      app-name: ${{ env.AZURE_WEBAPP_NAME }}
-      publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-      package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+      - name: 'Build and Push to DockerHub'
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DockerUsername }}
+          password: ${{ secrets.DockerPassword }}
+          repository: dbots/dbots
+          tag_with_ref: true
+          path: dist/apps/disgrace-bot

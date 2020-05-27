@@ -26,6 +26,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: git fetch --no-tags --prune --depth=5 origin master
       - run: yarn
-      - run: yarn affected:lint --base=origin/master
-      - run: yarn affected:build --base=origin/master --prod
-      - run: yarn affected:test --base=origin/master
+      - run: yarn affected:lint --base=origin/master --parallel
+      - run: yarn affected:build --base=origin/master --parallel --prod
+      - run: yarn affected:test --base=origin/master --parallel
