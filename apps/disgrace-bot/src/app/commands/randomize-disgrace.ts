@@ -1,5 +1,5 @@
+import { environment } from '../../environments/environment';
 import { Client, Message } from 'discord.js';
-import * as config from '../../assets/json/config.json';
 import { ChannelType } from '../types/channel-type';
 
 function randomizeDisgrace(message: Message): void {
@@ -27,8 +27,8 @@ function randomizeDisgrace(message: Message): void {
 export function randomizeDisgracersOnMessage(client: Client): void {
   client.on('message', (message) => {
     if (
-      message.content.startsWith(`${config.prefix}rd`) ||
-      message.content.startsWith(`${config.prefix}random-disgrace`)
+      message.content.startsWith(`${environment.prefix}rd`) ||
+      message.content.startsWith(`${environment.prefix}random-disgrace`)
     ) {
       randomizeDisgrace(message);
     }
