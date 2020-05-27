@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: git fetch --no-tags --prune --depth=5 origin master
       - run: yarn
+      - run: mkdir -p apps/disgrace-bot/assets/json/ && touch apps/disgrace-bot/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> apps/disgrace-bot/assets/json/config.json
       - run: yarn affected:lint --base=origin/master --parallel
       - run: yarn affected:build --base=origin/master --parallel --prod
-      - run: mkdir -p dist/apps/disgrace-bot/assets/json/ && touch dist/apps/disgrace-bot/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> dist/apps/disgrace-bot/assets/json/config.json
       - run: yarn affected:test --base=origin/master --parallel
