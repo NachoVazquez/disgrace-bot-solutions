@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: copy discord bot secrets
-        run: mkdir -p apps/disgrace-bot/assets/json/ && touch apps/disgrace-bot/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> apps/disgrace-bot/assets/json/config.json
+        run: mkdir -p apps/disgrace-bot/src/assets/json/ && touch apps/disgrace-bot/src/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> apps/disgrace-bot/src/assets/json/config.json
       - name: npm install, build, and test
         run: |
           # Build and test the project, then
