@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: CI
 
 on:
@@ -26,6 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: git fetch --no-tags --prune --depth=5 origin master
       - run: yarn
+      # copy discord bot token to config file
       - run: mkdir -p apps/disgrace-bot/src/assets/json/ && touch apps/disgrace-bot/src/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\"}" >> apps/disgrace-bot/src/assets/json/config.json
       - run: yarn affected:lint --base=origin/master --parallel
       - run: yarn affected:build --base=origin/master --parallel --prod
