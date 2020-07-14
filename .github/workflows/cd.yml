@@ -32,7 +32,7 @@ jobs:
 
       - name: 'Build and Push to DockerHub'
         env:
-          AFFECTED_APPS: ${{ yarn affected:apps }}
+          AFFECTED_APPS: $(yarn affected:apps)
         if: ${{ contains($AFFECTED_APPS, 'disgrace-bot')  }}
         uses: docker/build-push-action@v1
         with:
