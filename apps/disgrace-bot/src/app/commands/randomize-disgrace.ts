@@ -28,7 +28,8 @@ export function randomizeDisgracersOnMessage(client: Client): void {
   client.on('message', (message) => {
     if (
       message.content.startsWith(`${environment.prefix}rd`) ||
-      message.content.startsWith(`${environment.prefix}random-disgrace`)
+      message.content.startsWith(`${environment.prefix}random-disgrace`) ||
+      message.content.startsWith(`${environment.prefix}ran-dis`)
     ) {
       randomizeDisgrace(message);
     }
