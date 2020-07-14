@@ -11,12 +11,20 @@ export function enteredDisgrace(client: Client): void {
     if (!oldUserChannel && !!newUserChannel) {
       const connection = await newUserChannel.join();
 
+      const date = new Date();
+
       switch (newMember.member.id) {
         case disgracers['Marcel']:
           connection.play(path.join(__dirname, 'assets/sounds/marcel.mp3'));
           break;
         case disgracers['Norby']:
-          connection.play(path.join(__dirname, 'assets/sounds/norby.mp3'));
+          if (date.getDay() === 2 && date.getMonth() === 6) {
+            connection.play(
+              path.join(__dirname, 'assets/sounds/insu-cumple.mp3')
+            );
+          } else {
+            connection.play(path.join(__dirname, 'assets/sounds/norby.mp3'));
+          }
           break;
         case disgracers['Mauro']:
           connection.play(path.join(__dirname, 'assets/sounds/mauro.mp3'));
