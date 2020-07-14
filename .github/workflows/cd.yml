@@ -26,11 +26,14 @@ jobs:
           # Build and test the project, then
           # deploy to Azure Web App.
           yarn
-          yarn nx affected --target=build --base=$(git rev-parse HEAD~1)
-          yarn nx affected --target=test --base=$(git rev-parse HEAD~1)
+          yarn nx affected --target=build --base=$(git rev-parse HEAD~1) --parallel
+          yarn nx affected --target=test --base=$(git rev-parse HEAD~1) --parallel
           yarn azure-prep
 
       - name: 'Build and Push to DockerHub'
+        env:
+          AFFECTED_APPS: ${{ yarn affected:apps }}
+        if: ${{ contains($AFFECTED_APPS, 'disgrace-bot')  }}
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DockerUsername }}
