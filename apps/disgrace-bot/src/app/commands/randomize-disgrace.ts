@@ -24,6 +24,12 @@ function randomizeDisgrace(message: Message): void {
   }
 }
 
+/**
+ * Listen to message from user searching for randomize command
+ *
+ * @export
+ * @param {Client} client
+ */
 export function randomizeDisgracersOnMessage(client: Client): void {
   client.on('message', (message) => {
     if (
