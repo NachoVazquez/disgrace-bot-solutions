@@ -1,12 +1,11 @@
 import { environment } from '../../environments/environment';
-import { Client, Message } from 'discord.js';
-import { ChannelType } from '../types/channel-type';
+import { Channel, Client, Message } from 'discord.js';
 
 function randomizeDisgrace(message: Message): void {
   const { members } = message.mentions;
 
   const voiceChannels = message.mentions.channels
-    .filter((channel) => (channel.type as string) === ChannelType.voice)
+    .filter((channel) => (channel as Channel).type === 'voice')
     .array();
 
   let currChannelIndex = 0;

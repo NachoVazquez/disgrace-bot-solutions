@@ -1,29 +1,35 @@
-import { Client, TextChannel } from 'discord.js';
+import { Client } from 'discord.js';
+
 import { randomizeDisgracersOnMessage } from '../commands/randomize-disgrace';
 import * as config from '../../assets/json/config.json';
 import { enteredDisgrace } from '../events/entered-disgrace';
+import { broadcastOnBotReady } from '../events/broadcast-on-ready';
+import { setupRollbar } from '../setup-rollbar';
 
 export class DisgraceBot {
   client: Client;
 
-  async start() {
+  async start(): Promise<void> {
     this.client = new Client();
-    this.broadcastOnBotReady();
-    randomizeDisgracersOnMessage(this.client);
-    enteredDisgrace(this.client);
-    await this.client.login(config.token);
+    this.setupEvents();
+    this.setupCommands();
+    const rollbar = setupRollbar();
+
+    try {
+      await this.client.login(config.token);
+      rollbar.log('[Disgrace Bot] Client login succeed.');
+    } catch (error) {
+      rollbar.error('[Disgrace Bot] Client login failed. \n' + error.message);
+      throw error;
+    }
   }
 
-  broadcastOnBotReady(): void {
-    this.client.once('ready', () => {
-      this.client.channels.cache.each((channel) => {
-        if (
-          channel.type === 'text' ||
-          (channel.type === 'dm' && channel.id === '712686629646499891')
-        ) {
-          (channel as TextChannel).send('Comienza la desgracia');
-        }
-      });
-    });
+  setupEvents(): void {
+    broadcastOnBotReady(this.client, ['758060659643645993']);
+    enteredDisgrace(this.client);
+  }
+
+  setupCommands(): void {
+    randomizeDisgracersOnMessage(this.client);
   }
 }
