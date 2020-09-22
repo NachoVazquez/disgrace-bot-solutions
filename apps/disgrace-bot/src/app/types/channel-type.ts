@@ -1,10 +1,9 @@
-export enum ChannelType {
-  text = 'text',
-  dm = 'dm',
-  voice = 'voice',
-  group = 'group',
-  category = 'category',
-  news = 'news',
-  store = 'store',
-  unknown = 'unknown',
-}
+export type ChannelType =
+  | 'text'
+  | 'dm'
+  | 'voice'
+  | 'group'
+  | 'category'
+  | 'news'
+  | 'store'
+  | 'unknown';

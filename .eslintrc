@@ -17,7 +17,7 @@
   ],
   "rules": {
     "@typescript-eslint/explicit-member-accessibility": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-function-return-type": "warn",
     "@typescript-eslint/no-parameter-properties": "off",
     "@nrwl/nx/enforce-module-boundaries": [
       "error",
@@ -28,7 +28,8 @@
           { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
         ]
       }
-    ]
+    ],
+    "semi": "warn"
   },
   "overrides": [
     {

@@ -1,118 +1,6 @@
 {
   "version": 1,
   "projects": {
-    "disgrace-management": {
-      "root": "apps/disgrace-management",
-      "sourceRoot": "apps/disgrace-management/src",
-      "projectType": "application",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/web:build",
-          "options": {
-            "outputPath": "dist/apps/disgrace-management",
-            "index": "apps/disgrace-management/src/index.html",
-            "main": "apps/disgrace-management/src/main.tsx",
-            "polyfills": "apps/disgrace-management/src/polyfills.ts",
-            "tsConfig": "apps/disgrace-management/tsconfig.app.json",
-            "assets": [
-              "apps/disgrace-management/src/favicon.ico",
-              "apps/disgrace-management/src/assets"
-            ],
-            "styles": [],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/disgrace-management/src/environments/environment.ts",
-                  "with": "apps/disgrace-management/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/web:dev-server",
-          "options": {
-            "buildTarget": "disgrace-management:build"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "disgrace-management:build:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "config": "apps/disgrace-management/.eslintrc",
-            "tsConfig": [
-              "apps/disgrace-management/tsconfig.app.json",
-              "apps/disgrace-management/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/disgrace-management/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/disgrace-management/jest.config.js",
-            "tsConfig": "apps/disgrace-management/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "disgrace-management-e2e": {
-      "root": "apps/disgrace-management-e2e",
-      "sourceRoot": "apps/disgrace-management-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/disgrace-management-e2e/cypress.json",
-            "tsConfig": "apps/disgrace-management-e2e/tsconfig.e2e.json",
-            "devServerTarget": "disgrace-management:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "disgrace-management:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "config": "apps/disgrace-management-e2e/.eslintrc",
-            "tsConfig": ["apps/disgrace-management-e2e/tsconfig.e2e.json"],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/disgrace-management-e2e/**"
-            ]
-          }
-        }
-      }
-    },
     "disgrace-bot": {
       "root": "apps/disgrace-bot",
       "sourceRoot": "apps/disgrace-bot/src",
@@ -238,6 +126,5 @@
         "linter": "eslint"
       }
     }
-  },
-  "defaultProject": "disgrace-management"
+  }
 }

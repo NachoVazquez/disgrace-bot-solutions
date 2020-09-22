@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
-    "discord.js": "^12.2.0",
-    "express": "^4.17.1"
+    "discord.js": "^12.3.1",
+    "express": "^4.17.1",
+    "rollbar": "^2.19.3"
   }
 }
