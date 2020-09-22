@@ -19,13 +19,6 @@
     }
   },
   "projects": {
-    "disgrace-management": {
-      "tags": []
-    },
-    "disgrace-management-e2e": {
-      "tags": [],
-      "implicitDependencies": ["disgrace-management"]
-    },
     "disgrace-bot": {
       "tags": []
     }
