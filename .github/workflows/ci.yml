@@ -24,7 +24,7 @@ jobs:
       - run: git fetch --no-tags --prune --depth=5 origin master
       - run: yarn
       # copy discord bot token to config file
-      - run: mkdir -p apps/disgrace-bot/src/assets/json/ && touch apps/disgrace-bot/src/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\",\"rollbarToken\":\"${{secrets.ROLLBAR_TOKEN}}\"}" >> apps/disgrace-bot/src/assets/json/config.json
+      - run: yarn nx affected --target=cloud-config --DisgraceBotToken=${{ secrets.DisgraceBotToken}} --ROLLBAR_TOKEN=${{ secrets.ROLLBAR_TOKEN}} --base=$(git rev-parse HEAD~1) --parallel
       - run: yarn affected:lint --base=origin/master --parallel
       - run: yarn affected:build --base=origin/master --parallel --prod
       - run: yarn affected:test --base=origin/master --parallel

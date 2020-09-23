@@ -69,6 +69,17 @@
             "parallel": false
           }
         },
+        "cloud-config": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "mkdir -p apps/disgrace-bot/src/assets/json/",
+              "touch apps/disgrace-bot/src/assets/json/config.json",
+              "echo {\"token\":\"{args.DisgraceBotToken}\",\"rollbarToken\":\"{args.ROLLBAR_TOKEN}\"} >> apps/disgrace-bot/src/assets/json/config.json"
+            ],
+            "parallel": false
+          }
+        },
         "deploy-local": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {

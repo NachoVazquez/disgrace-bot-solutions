@@ -14,6 +14,7 @@
     "affected:build": "nx affected:build",
     "affected:pre-deploy": "nx affected --target=pre-deploy",
     "affected:deploy-local": "nx affected --target=deploy-local",
+    "affected:cloud-config": "nx affected --target=cloud-config",
     "affected:e2e": "nx affected:e2e",
     "affected:test": "nx affected:test",
     "affected:lint": "nx affected:lint",

@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: copy discord bot secrets
-        run: mkdir -p apps/disgrace-bot/src/assets/json/ && touch apps/disgrace-bot/src/assets/json/config.json && echo "{\"token\":\"${{secrets.DisgraceBotToken}}\",\"rollbarToken\":\"${{secrets.ROLLBAR_TOKEN}}\"}" >> apps/disgrace-bot/src/assets/json/config.json
+        run: yarn nx affected --target=cloud-config --DisgraceBotToken=${{ secrets.DisgraceBotToken}} --ROLLBAR_TOKEN=${{ secrets.ROLLBAR_TOKEN}} --base=$(git rev-parse HEAD~1) --parallel
       - name: npm install, build, and test
         run: |
           # Build and test the project, then
