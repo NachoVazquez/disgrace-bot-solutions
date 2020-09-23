@@ -31,7 +31,7 @@ jobs:
           yarn nx affected --target=pre-deploy --base=$(git rev-parse HEAD~1) --parallel
       - name: Store Affected apps
         id: affected_apps
-        run: echo "::set-output name=AffectedApps::$(nx affected:apps --base=$(git rev-parse HEAD~1) --plain)"
+        run: echo "::set-output name=AffectedApps::$(npx nx affected:apps --base=$(git rev-parse HEAD~1) --plain)"
       - name: 'Build and Push to DockerHub'
         if: contains(steps.affected_apps.outputs.AffectedApps, 'disgrace-bot')
         uses: docker/build-push-action@v1
