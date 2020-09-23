@@ -28,11 +28,12 @@ jobs:
           yarn
           yarn nx affected --target=build --base=$(git rev-parse HEAD~1) --parallel
           yarn nx affected --target=test --base=$(git rev-parse HEAD~1) --parallel
-          yarn azure-prep
+          nx affected --target=pre-deploy --base=$(git rev-parse HEAD~1) --parallel
       - name: Store Affected apps
-        run: echo ::set-env name=AFFECTED_APPS::$(echo $(yarn affected:apps --base=$(git rev-parse HEAD~1)))
+        id: affected_apps
+        run: echo "::set-output name=AffectedApps::$(nx affected:apps --base=$(git rev-parse HEAD~1) --plain)"
       - name: 'Build and Push to DockerHub'
-        if: contains(env.AFFECTED_APPS, 'disgrace-bot')
+        if: contains(steps.affected_apps.outputs.AffectedApps, 'disgrace-bot')
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DockerUsername }}

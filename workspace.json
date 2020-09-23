@@ -55,6 +55,30 @@
             "tsConfig": "apps/disgrace-bot/tsconfig.spec.json",
             "passWithNoTests": true
           }
+        },
+        "pre-deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "mkdir -p dist/apps/disgrace-bot/assets/json/",
+              "cp apps/disgrace-bot/package.json dist/apps/disgrace-bot/",
+              "cp apps/disgrace-bot/web.config dist/apps/disgrace-bot/",
+              "cp apps/disgrace-bot/Dockerfile dist/apps/disgrace-bot/",
+              "cp apps/disgrace-bot/.dockerignore dist/apps/disgrace-bot/"
+            ],
+            "parallel": false
+          }
+        },
+        "deploy-local": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "nx run disgrace-bot:pre-deploy",
+              "cp apps/disgrace-bot/src/assets/json/config.json dist/apps/disgrace-bot/assets/json/",
+              "cd dist/apps/disgrace-bot/ && docker build -t dbots/dbots . && docker run -d dbots/dbots"
+            ],
+            "parallel": false
+          }
         }
       }
     }
