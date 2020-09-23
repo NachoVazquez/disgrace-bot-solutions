@@ -31,7 +31,7 @@ jobs:
           yarn azure-prep
       - name: 'Build and Push to DockerHub'
         env:
-          AFFECTED_APPS: $(yarn affected:apps --base=$(git rev-parse HEAD~1))
+          AFFECTED_APPS: ${{yarn affected:apps --base=$(git rev-parse HEAD~1)}}
         if: contains(env.AFFECTED_APPS, 'disgrace-bot')
         uses: docker/build-push-action@v1
         with:
